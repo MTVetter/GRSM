@@ -273,3 +273,26 @@ var baseLayers = {
 };
 //Add the base maps to the map so the user can decide
 L.control.layers(null, baseLayers).addTo(map);
+
+//Add a button to find a user's location and display it on the map
+L.control.locate({icon: 'fas fa-map-marker-alt fa-lg'}).addTo(map);
+
+//Create a search window
+var searchControl = new L.Control.Search(
+    {layer: trails,
+    propertyName: 'trailname',
+    zoom: 10,
+    textErr: 'Team does not exist',
+    textPlaceholder: 'Search for trail...',
+    marker: false,
+    animate: false});
+searchControl.on('search_locationfound', function(e){
+    e.layer.setStyle({fillColor: 'black', color: 'black', fillOpacity: 1});
+    if (e.layer._popup)
+        e.layer.openPopup();
+}).on('search_collapsed', function(e){
+    featureLayer.eachLayer(function(layer){
+        featureLayer.resetStyle(layer);
+    });
+});
+map.addControl(searchControl);

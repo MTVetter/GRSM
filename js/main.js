@@ -60,10 +60,10 @@ var trails = L.geoJson(null, {
     }
 }).addTo(map);
 //Create the SQL query
-var query = "SELECT * FROM grsm_trails";
+var trailQuery = "SELECT * FROM grsm_trails";
 //Get username in order to execute the query
 var sql = new cartodb.SQL({user: 'brbadger'});
-sql.execute(query, null, {format: "geojson"}).done(function(data){
+sql.execute(trailQuery, null, {format: "geojson"}).done(function(data){
     trails.addData(data);
 });
 
@@ -281,13 +281,13 @@ L.control.locate({icon: 'fas fa-map-marker-alt fa-lg'}).addTo(map);
 var searchControl = new L.Control.Search(
     {layer: trails,
     propertyName: 'trailname',
-    zoom: 10,
-    textErr: 'Team does not exist',
+    zoom: 14,
+    textErr: 'Trail does not exist',
     textPlaceholder: 'Search for trail...',
     marker: false,
     animate: false});
 searchControl.on('search_locationfound', function(e){
-    e.layer.setStyle({fillColor: 'black', color: 'black', fillOpacity: 1});
+    layer.setStyle({color: 'yellow'});
     if (e.layer._popup)
         e.layer.openPopup();
 }).on('search_collapsed', function(e){
@@ -296,3 +296,9 @@ searchControl.on('search_locationfound', function(e){
     });
 });
 map.addControl(searchControl);
+
+$(".btn-blount").on("click", function(e){
+    var query = "SELECT * FROM grsm_trails WHERE county = 'Blount'";
+    
+
+})

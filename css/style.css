@@ -17,6 +17,15 @@ body{
 #map{
     flex: 2 1 auto;
 }
+/* #panel{
+    flex: 1 1 auto;
+} */
+h1{
+    font-family: "Righteous"
+}
+.subtitle{
+    font-family: "Amiko"
+}
 
 @media screen and (max-width: 768px){
     #wrapper{

@@ -17,8 +17,8 @@
 		<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css">
 		<link rel="stylesheet" href="lib/leaflet-locatecontrol-gh-pages/leaflet-locatecontrol-gh-pages/dist/L.Control.Locate.mapbox.min.css">
 		<!-- <link rel="stylesheet" href="css/leaflet-tag-filter-button.css"> -->
-		<link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Gudea" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Amiko" rel="stylesheet">
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		<!--[if IE<9]>
 			<link rel="stylesheet" href="css/style.ie.css">
@@ -31,6 +31,26 @@
 		<!--you can also use this space for internal scripts or stylesheets;
 		place these within <script> or <style> tags-->
 		<div id="wrapper">
+			<div id="panel">
+				<h1 class="title">
+					Great Smoky Mountains
+				</h1>
+				<p class="subtitle">
+					Welcome to the Great Smoky Mountains! <br><br>This app allows you to search
+					for trails, restrooms,<br> ranger stations, picnic areas, and campsites near you.
+				</p>
+				<h4 class="filter">Filter by County</h4>
+				<div id="filtered_county"></div>
+				<div class="button">
+					<button type="button" id="all" class="btn btn-all">All</button>
+					<button type="button" id="blount" class="btn btn-blount">Blount</button>
+					<button type="button" id="cocke" class="btn btn-cocke">Cocke</button>
+					<button type="button" id="haywood" class="btn btn-haywood">Haywood</button>
+					<button type="button" id="sevier" class="btn btn-sevier">Sevier</button>
+					<button type="button" id="swain" class="btn btn-swain">Swain</button>
+					<button type="button" id="reset" class="btn btn-reset">Reset</button>
+				</div>
+			</div>
 			<div id="map"></div>
 		</div>
 		<!--put your external script links here-->

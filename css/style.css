@@ -22,9 +22,19 @@ body{
 } */
 h1, h4{
     font-family: "Righteous";
+    text-align: center;
+    color: "#2b8d4c";
 }
 .subtitle{
     font-family: "Amiko";
+}
+.button{
+    padding-bottom: 20px;
+}
+.btn-blount{
+    background-color: peachpuff;
+    color: black;
+    margin: 2px 2px;
 }
 
 @media screen and (max-width: 768px){

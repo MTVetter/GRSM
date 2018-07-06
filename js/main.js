@@ -1268,3 +1268,100 @@ $(".btn-reset").on("click", function(){
     removeLayers();
     map.addLayer(trails);
 });
+
+//Create the features that the users will enter
+var collectedPoints = L.geoJson(null,{
+    // pointToLayer: function(feature, latlng){
+    //     return L.marker(latlng, {
+    //         icon: waterCampIcon
+    //     });
+    // },
+    // onEachFeature: function (feature, layer){
+    //     var popupText = "Location Name: " +feature.properties.label +
+    //     "<br>On Trail: " +feature.properties.trail +
+    //     "<br>Capacity: " +feature.properties.capacity +
+    //     "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
+    //     "<br>Bear Cables: " +feature.properties.bearcables +
+    //     "<br>Elevation (feet): " +feature.properties.elev_ft +
+    //     "<br>Elevation (meters): " +feature.properties.elev_m; 
+    //     layer.bindPopup(popupText);
+    // }
+});
+//Create the SQL query
+var sqlQuery = "SELECT * FROM grsm_collected_data";
+//Get username in order to execute the query
+var sql = new cartodb.SQL({user: 'brbadger'});
+sql.execute(wCampQuery, null, {format: "geojson"}).done(function(data){
+    collectedPoints.addData(data);
+});
+
+//Create the Draw control for the draw tools and toolbox
+var drawControl = new L.Control.Draw({
+    draw: {
+        polygon: false,
+        polyine: false,
+        rectangle: false,
+        circle: false
+    },
+    edit: false,
+    remove: false
+});
+
+//Variable to control visiblity of entered data
+var controlOnMap = false;
+
+//Variable for the Leaflet.draw features
+var drawItems = new L.FeatureGroup();
+
+//Function to start editing
+function startEditing(){
+    if (controlOnMap == true){
+        map.removeControl(drawControl);
+        controlOnMap = false;
+    }
+    map.addControl(drawControl);
+    controlOnMap = true;
+};
+
+//Function to end editing
+function endEditing(){
+    map.removeControl(drawControl);
+    controlOnMap = false;
+};
+
+//Function when feature is drawn on map
+map.on("draw:created", function(e){
+    var layer = e.layer;
+    drawItems.addLayer(layer);
+    map.addLayer(drawItems);
+    dialog.dialog("open");
+});
+
+//Create a jQuery UI dialog box
+var dialog = $("#dialog").dialog({
+    autoOpen: false,
+    height: 300,
+    width: 300,
+    modal: true,
+    position:{
+        my: "center center",
+        at: "center center",
+        of: "#map"
+    },
+    buttons:{
+        "Submit": setData,
+        Cancel: function(){
+            dialog.dialog("close");
+            map.removeLayer(drawItems);
+        }
+    },
+    close: function (){
+        form[0].reset();
+        console.log("Dialog has successfully closed");
+    }
+});
+
+//Function to prevent an empty submission
+var form = dialog.find("form").on("submit", function(event){
+    event.preventDefault();
+});

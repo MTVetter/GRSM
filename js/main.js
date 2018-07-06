@@ -1338,7 +1338,7 @@ map.on("draw:created", function(e){
 });
 
 //Create a jQuery UI dialog box
-var dialog = $("#dialog").dialog({
+var dialog = $("#form").dialog({
     autoOpen: false,
     height: 300,
     width: 300,
@@ -1365,3 +1365,21 @@ var dialog = $("#dialog").dialog({
 var form = dialog.find("form").on("submit", function(event){
     event.preventDefault();
 });
+
+//Function to enter data into the database
+function setData(){
+    var enteredUsername = username.value;
+    var enteredDescription = description.value;
+    var enteredLocation = location.value;
+    drawItems.eachLayer(function (layer){
+        var postSQL = "INSERT INTO grsm_collected_data (the_geom, location, description, latitude, longitude, name) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
+        var a = layer.getLatLng();
+        var postSQL2 = '{"type":"Point", "coordinate":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredLocation + "','" + enteredDescription +"','"+a.lat+"','"+a.lng+"','"+enteredUsername+"')";
+        var pURL = postSQL + postSQL2;
+        $.post("https://brbadger.carto.com/api/v2/sql?q=" + pURL + "&api_key={33f541577cddb55c4781b1ed07bd4c9a4a36ed4c}")
+    });
+    map.removeLayer(drawItems);
+    drawItems = new L.FeatureGroup();
+    console.log("drawItems has been cleared");
+    dialog.dialog("close");
+};

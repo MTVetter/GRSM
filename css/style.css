@@ -20,11 +20,11 @@ body{
 /* #panel{
     flex: 1 1 auto;
 } */
-h1{
-    font-family: "Righteous"
+h1, h4{
+    font-family: "Righteous";
 }
 .subtitle{
-    font-family: "Amiko"
+    font-family: "Amiko";
 }
 
 @media screen and (max-width: 768px){

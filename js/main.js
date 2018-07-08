@@ -19,6 +19,12 @@ var esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wor
     attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
 }).addTo(map);
 
+//Add weather map service
+var weather = L.esri.dynamicMapLayer({
+    url: 'https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer',
+    opacity: 0.7
+  }).addTo(map);
+
 //Create the features for Blount County
 //Add trails
 var blountTrails = L.geoJson(null,{
@@ -1101,7 +1107,8 @@ var baseLayers = {
     "Picnic Areas": picnic,
     "Horse and Hiker Campsites": hhCamp,
     "Hiker Only Campsite": camp,
-    "Water-access Only Campsite": wCamp
+    "Water-access Only Campsite": wCamp,
+    "Weather": weather
 };
 //Add the base maps to the map so the user can decide
 L.control.layers(null, baseLayers).addTo(map);
@@ -1269,31 +1276,37 @@ $(".btn-reset").on("click", function(){
     map.addLayer(trails);
 });
 
-//Create the features that the users will enter
-var collectedPoints = L.geoJson(null,{
-    // pointToLayer: function(feature, latlng){
-    //     return L.marker(latlng, {
-    //         icon: waterCampIcon
-    //     });
-    // },
-    // onEachFeature: function (feature, layer){
-    //     var popupText = "Location Name: " +feature.properties.label +
-    //     "<br>On Trail: " +feature.properties.trail +
-    //     "<br>Capacity: " +feature.properties.capacity +
-    //     "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
-    //     "<br>Bear Cables: " +feature.properties.bearcables +
-    //     "<br>Elevation (feet): " +feature.properties.elev_ft +
-    //     "<br>Elevation (meters): " +feature.properties.elev_m; 
-    //     layer.bindPopup(popupText);
-    // }
-});
-//Create the SQL query
-var sqlQuery = "SELECT * FROM grsm_collected_data";
-//Get username in order to execute the query
-var sql = new cartodb.SQL({user: 'brbadger'});
-sql.execute(wCampQuery, null, {format: "geojson"}).done(function(data){
-    collectedPoints.addData(data);
-});
+
+//Create a function that will refresh the entered data before putting it on the map
+function refresh(){
+    //Icon to represent the reported problem
+    var problemIcon = L.icon({
+        iconUrl: "img/problem.png",
+        iconSize: [30,30]
+    });
+
+    //Create the features that the users will enter
+    var collectedPoints = L.geoJson(null,{
+        pointToLayer: function(feature, latlng){
+            return L.marker(latlng, {
+                icon: problemIcon
+            });
+        },
+        onEachFeature: function (feature, layer){
+            var popupText = "Location Name: " +feature.properties.location +
+            "<br>Description of Problem: " +feature.properties.description +
+            "<br>Entered By: " +feature.properties.name; 
+            layer.bindPopup(popupText);
+        }
+    }).addTo(map);
+    //Create the SQL query
+    var sqlQuery = "SELECT * FROM grsm_collected_data";
+    //Get username in order to execute the query
+    var sql = new cartodb.SQL({user: 'brbadger'});
+    sql.execute(sqlQuery, null, {format: "geojson"}).done(function(data){
+        collectedPoints.addData(data);
+    });
+};
 
 //Create the Draw control for the draw tools and toolbox
 var drawControl = new L.Control.Draw({
@@ -1327,6 +1340,7 @@ function startEditing(){
 function endEditing(){
     map.removeControl(drawControl);
     controlOnMap = false;
+    refresh();
 };
 
 //Function when feature is drawn on map
@@ -1370,13 +1384,15 @@ var form = dialog.find("form").on("submit", function(event){
 function setData(){
     var enteredUsername = username.value;
     var enteredDescription = description.value;
-    var enteredLocation = location.value;
+    var enteredLocation = loc.value;
+    console.log(enteredLocation);
     drawItems.eachLayer(function (layer){
         var postSQL = "INSERT INTO grsm_collected_data (the_geom, location, description, latitude, longitude, name) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
         var a = layer.getLatLng();
-        var postSQL2 = '{"type":"Point", "coordinate":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredLocation + "','" + enteredDescription +"','"+a.lat+"','"+a.lng+"','"+enteredUsername+"')";
+        var postSQL2 = '{"type":"Point", "coordinates":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredLocation + "','" + enteredDescription +"','"+a.lat+"','"+a.lng+"','"+enteredUsername+"')";
+        console.log(postSQL2);
         var pURL = postSQL + postSQL2;
-        $.post("https://brbadger.carto.com/api/v2/sql?q=" + pURL + "&api_key={33f541577cddb55c4781b1ed07bd4c9a4a36ed4c}")
+        $.post("https://brbadger.carto.com/api/v2/sql?q=" + pURL + "&api_key=33f541577cddb55c4781b1ed07bd4c9a4a36ed4c")
     });
     map.removeLayer(drawItems);
     drawItems = new L.FeatureGroup();

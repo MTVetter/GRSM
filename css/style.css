@@ -16,10 +16,9 @@ body{
 }
 #map{
     flex: 2 1 auto;
+    position: relative;
+    z-index: 1;
 }
-/* #panel{
-    flex: 1 1 auto;
-} */
 h1, h4{
     font-family: "Righteous";
     text-align: center;
@@ -31,10 +30,13 @@ h1, h4{
 .button{
     padding-bottom: 20px;
 }
-.btn-blount{
+/* .btn-blount{
     background-color: peachpuff;
     color: black;
     margin: 2px 2px;
+} */
+#form{
+    z-index: 2;
 }
 
 @media screen and (max-width: 768px){

@@ -53,26 +53,27 @@
 					<button type="button" id="start" class="btn btn-start" onclick="startEditing()">Start Editing</button>
 					<button type="button" id="end" class="btn btn-end" onclick="endEditing()">End Editing</button>
 				</div>
-				<div id="form" title="Problem Information">
-					<form>
-						<fieldset>
-							<label for="name">Name:</label>
-							<input type="text" name="username" id="username" placeholder="Enter your name..." class="text ui-widget-content ui-corner-all">
-							<label for="probDesc">Description of Problem</label>
-							<input type="text" name="description" id="description" placeholder="Enter the problem..." class="text ui-widget-content ui-corner-all">
-							<label for="probLocation">Location of Problem</label>
-							<input type="text" name="location" id="location" placeholder="Enter the location..." class="text ui-widget-content ui-corner-all">
-							<input type="submit" tabindex="-1" style="position: absolute; top:-1000px">
-						</fieldset>
-					</form>
-				</div>
 			</div>
 			<div id="map"></div>
+		</div>
+		<div id="form" title="Problem Information">
+			<form>
+				<fieldset>
+					<label for="name">Name:</label>
+					<input type="text" name="username" id="username" placeholder="Enter your name..." class="text ui-widget-content ui-corner-all">
+					<label for="probDesc">Description of Problem</label>
+					<input type="text" name="description" id="description" placeholder="Enter the problem..." class="text ui-widget-content ui-corner-all">
+					<label for="probLocation">Location of Problem</label>
+					<input type="text" name="loc" id="loc" placeholder="Enter the location..." class="text ui-widget-content ui-corner-all">
+					<input type="submit" tabindex="-1" style="position: absolute; top:-1000px">
+				</fieldset>
+			</form>
 		</div>
 		<!--put your external script links here-->
 		<script type="text/javascript" src="lib/leaflet/leaflet-src.js"></script>
 		<script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="lib/esri-leaflet-v2.1.4/dist/esri-leaflet.js"></script>
 		<script src="lib/leaflet-search/src/leaflet-search.js"></script>
 		<script type="text/javascript" src="js/easy-button.js"></script>
         <script type="text/javascript" src="js/leaflet.zoomhome.min.js"></script>

@@ -19,13 +19,12 @@ body{
     position: relative;
     z-index: 1;
 }
-h1, h4{
+h1, h3{
     font-family: "Righteous";
     text-align: center;
     color: #666600;
 }
 #logo{
-    padding-top: 20px;
     padding-left: 45px;
     background-color: transparent;
 }
@@ -36,8 +35,9 @@ h1, h4{
     font-family: "Amiko";
     text-align: center;
 }
-.button{
-    padding-bottom: 20px;
+.edit-info{
+    font-family: "Amiko";
+    text-align: center;
 }
 .btn-blount{
     background-color: #0099CC;
@@ -167,7 +167,6 @@ h1, h4{
         padding-left: 180px;
     }
     #logo{
-        padding-top: 20px;
         padding-left: 120px;
         background-color: transparent;
     }

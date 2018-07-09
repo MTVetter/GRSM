@@ -22,19 +22,125 @@ body{
 h1, h4{
     font-family: "Righteous";
     text-align: center;
-    color: "#2b8d4c";
+    color: #666600;
+}
+#logo{
+    padding-top: 20px;
+    padding-left: 45px;
+    background-color: transparent;
+}
+#panel{
+    background-color: lightgoldenrodyellow; 
 }
 .subtitle{
     font-family: "Amiko";
+    text-align: center;
 }
 .button{
     padding-bottom: 20px;
 }
-/* .btn-blount{
-    background-color: peachpuff;
+.btn-blount{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-blount:hover{
+    background-color: transparent;
     color: black;
-    margin: 2px 2px;
-} */
+    font-family: "Amiko";
+}
+.btn-cocke{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-cocke:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.btn-haywood{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-haywood:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.btn-sevier{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-sevier:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.btn-swain{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-swain:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.btn-reset{
+    background-color: #0099CC;
+    color: white;
+    border: 2px solid #0099CC;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-reset:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.button{
+    padding-left: 15px;
+}
+.edit_button{
+    padding-left: 105px;
+}
+.btn-start{
+    background-color: rosybrown;
+    color: white;
+    border: 2px solid rosybrown;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-start:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
+.btn-end{
+    background-color: rosybrown;
+    color: white;
+    border: 2px solid rosybrown;
+    border-radius: 6px;
+    font-family: "Amiko";
+}
+.btn-end:hover{
+    background-color: transparent;
+    color: black;
+    font-family: "Amiko";
+}
 #form{
     z-index: 2;
 }
@@ -53,5 +159,16 @@ h1, h4{
         order: 2;
         max-width: 100%;
         overflow: auto;
+    }
+    .button{
+        padding-left: 120px;
+    }
+    .edit_button{
+        padding-left: 180px;
+    }
+    #logo{
+        padding-top: 20px;
+        padding-left: 120px;
+        background-color: transparent;
     }
 }

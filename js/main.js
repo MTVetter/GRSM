@@ -28,6 +28,9 @@ var weather = L.esri.dynamicMapLayer({
 //Create the features for Blount County
 //Add trails
 var blountTrails = L.geoJson(null,{
+    style: function (feature){
+        return {color: "#800000", weight: 2};
+    },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
         layer.bindPopup(popupText);
@@ -192,6 +195,9 @@ sql.execute(blountWCampQuery, null, {format: "geojson"}).done(function(data){
 //Create the features for Cocke County
 //Add trails
 var cockeTrails = L.geoJson(null,{
+    style: function (feature){
+        return {color: "#800000", weight: 2};
+    },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
         layer.bindPopup(popupText);
@@ -359,6 +365,9 @@ sql.execute(cockeWCampQuery, null, {format: "geojson"}).done(function(data){
 //Create the features for Haywood County
 //Add trails
 var haywoodTrails = L.geoJson(null,{
+    style: function (feature){
+        return {color: "#800000", weight: 2};
+    },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
         layer.bindPopup(popupText);
@@ -526,6 +535,9 @@ sql.execute(haywoodWCampQuery, null, {format: "geojson"}).done(function(data){
 //Create the features for Sevier County
 //Add trails
 var sevierTrails = L.geoJson(null,{
+    style: function (feature){
+        return {color: "#800000", weight: 2};
+    },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
         layer.bindPopup(popupText);
@@ -693,6 +705,9 @@ sql.execute(sevierWCampQuery, null, {format: "geojson"}).done(function(data){
 //Create the features for Swain County
 //Add trails
 var swainTrails = L.geoJson(null,{
+    style: function (feature){
+        return {color: "#800000", weight: 2};
+    },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
         layer.bindPopup(popupText);
@@ -867,7 +882,7 @@ var highlightLine = {
 //Reset the line color for the trails
 var resetLine = {
     weight: 2,
-    color: "#D2691E"
+    color: "#800000"
 }
 
 //Function to highlight the feature
@@ -886,7 +901,7 @@ function reset(evt){
 //Adding the trails to the map
 var trails = L.geoJson(null, {
     style: function (feature){
-        return {color: "#D2691E", weight: 2};
+        return {color: "#800000", weight: 2};
     },
     onEachFeature: function (feature, layer){
         var popupText = "Trail Name: " +feature.properties.trailname;
@@ -1110,8 +1125,63 @@ var baseLayers = {
     "Water-access Only Campsite": wCamp,
     "Weather": weather
 };
+var blountLayers = {
+    "Trails": blountTrails,
+    "Restrooms": blountRestrooms,
+    "Ranger Stations": blountRangerStation,
+    "Picnic Areas": blountPicnic,
+    "Horse and Hiker Campsites": blountHHCamp,
+    "Hiker Only Campsite": blountCamp,
+    "Water-access Only Campsite": blountWCamp,
+    "Weather": weather
+};
+var cockeLayers = {
+    "Trails": cockeTrails,
+    "Restrooms": cockeRestrooms,
+    "Ranger Stations": cockeRangerStation,
+    "Picnic Areas": cockePicnic,
+    "Horse and Hiker Campsites": cockeHHCamp,
+    "Hiker Only Campsite": cockeCamp,
+    "Water-access Only Campsite": cockeWCamp,
+    "Weather": weather
+};
+var haywoodLayers = {
+    "Trails": haywoodTrails,
+    "Restrooms": haywoodRestrooms,
+    "Ranger Stations": haywoodRangerStation,
+    "Picnic Areas": haywoodPicnic,
+    "Horse and Hiker Campsites": haywoodHHCamp,
+    "Hiker Only Campsite": haywoodCamp,
+    "Water-access Only Campsite": haywoodWCamp,
+    "Weather": weather
+};
+var sevierLayers = {
+    "Trails": sevierTrails,
+    "Restrooms": sevierRestrooms,
+    "Ranger Stations": sevierRangerStation,
+    "Picnic Areas": sevierPicnic,
+    "Horse and Hiker Campsites": sevierHHCamp,
+    "Hiker Only Campsite": sevierCamp,
+    "Water-access Only Campsite": sevierWCamp,
+    "Weather": weather
+};
+var swainLayers = {
+    "Trails": swainTrails,
+    "Restrooms": swainRestrooms,
+    "Ranger Stations": swainRangerStation,
+    "Picnic Areas": swainPicnic,
+    "Horse and Hiker Campsites": swainHHCamp,
+    "Hiker Only Campsite": swainCamp,
+    "Water-access Only Campsite": swainWCamp,
+    "Weather": weather
+};
 //Add the base maps to the map so the user can decide
-L.control.layers(null, baseLayers).addTo(map);
+var initialLayerControl = L.control.layers(null, baseLayers).addTo(map);
+var blountLayerControl = L.control.layers(null, blountLayers);
+var cockeLayerControl = L.control.layers(null, cockeLayers);
+var haywoodLayerControl = L.control.layers(null, haywoodLayers);
+var sevierLayerControl = L.control.layers(null, sevierLayers);
+var swainLayerControl = L.control.layers(null, swainLayers);
 
 //Add a button to find a user's location and display it on the map
 L.control.locate({icon: 'fas fa-map-marker-alt fa-lg'}).addTo(map);
@@ -1138,7 +1208,7 @@ map.addControl(searchControl);
 
 //Function to remove layers
 function removeLayers(){
-    if (map.hasLayer(blountCamp) || map.hasLayer(trails)){
+    if (map.hasLayer(blountTrails) || map.hasLayer(trails)){
         map.removeLayer(blountCamp);
         map.removeLayer(blountHHCamp);
         map.removeLayer(blountPicnic);
@@ -1153,7 +1223,9 @@ function removeLayers(){
         map.removeLayer(restrooms);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
-    } else if (map.hasLayer(cockeCamp) || map.hasLayer(trails)){
+        blountLayerControl.remove(map);
+        initialLayerControl.remove(map);
+    } else if (map.hasLayer(cockeTrails) || map.hasLayer(trails)){
         map.removeLayer(cockeCamp);
         map.removeLayer(cockeHHCamp);
         map.removeLayer(cockePicnic);
@@ -1168,7 +1240,9 @@ function removeLayers(){
         map.removeLayer(restrooms);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
-    } else if (map.hasLayer(haywoodCamp) || map.hasLayer(trails)){
+        cockeLayerControl.remove(map);
+        initialLayerControl.remove(map);
+    } else if (map.hasLayer(haywoodTrails) || map.hasLayer(trails)){
         map.removeLayer(haywoodCamp);
         map.removeLayer(haywoodHHCamp);
         map.removeLayer(haywoodPicnic);
@@ -1183,7 +1257,9 @@ function removeLayers(){
         map.removeLayer(restrooms);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
-    } else if (map.hasLayer(sevierCamp) || map.hasLayer(trails)){
+        haywoodLayerControl.remove(map);
+        initialLayerControl.remove(map);
+    } else if (map.hasLayer(sevierTrails) || map.hasLayer(trails)){
         map.removeLayer(sevierCamp);
         map.removeLayer(sevierHHCamp);
         map.removeLayer(sevierPicnic);
@@ -1198,7 +1274,9 @@ function removeLayers(){
         map.removeLayer(restrooms);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
-    } else if (map.hasLayer(swainCamp) || map.hasLayer(trails)){
+        sevierLayerControl.remove(map);
+        initialLayerControl.remove(map);
+    } else if (map.hasLayer(swainTrails) || map.hasLayer(trails)){
         map.removeLayer(swainCamp);
         map.removeLayer(swainHHCamp);
         map.removeLayer(swainPicnic);
@@ -1213,66 +1291,45 @@ function removeLayers(){
         map.removeLayer(restrooms);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
+        swainLayerControl.remove(map);
+        initialLayerControl.remove(map);
     }
 }
 
 $(".btn-blount").on("click", function(){
     removeLayers();
-    map.addLayer(blountCamp);
-    map.addLayer(blountHHCamp);
-    map.addLayer(blountPicnic);
-    map.addLayer(blountRangerStation);
-    map.addLayer(blountRestrooms);
+    // initialLayerControl.remove(map);
+    blountLayerControl.addTo(map);
     map.addLayer(blountTrails);
-    map.addLayer(blountWCamp);
 });
 
 $(".btn-cocke").on("click", function(){
     removeLayers();
-    map.addLayer(cockeCamp);
-    map.addLayer(cockeHHCamp);
-    map.addLayer(cockePicnic);
-    map.addLayer(cockeRangerStation);
-    map.addLayer(cockeRestrooms);
+    cockeLayerControl.addTo(map);
     map.addLayer(cockeTrails);
-    map.addLayer(cockeWCamp);
 });
 
 $(".btn-haywood").on("click", function(){
     removeLayers();
-    map.addLayer(haywoodCamp);
-    map.addLayer(haywoodHHCamp);
-    map.addLayer(haywoodPicnic);
-    map.addLayer(haywoodRangerStation);
-    map.addLayer(haywoodRestrooms);
+    haywoodLayerControl.addTo(map);
     map.addLayer(haywoodTrails);
-    map.addLayer(haywoodWCamp);
 });
 
 $(".btn-sevier").on("click", function(){
     removeLayers();
-    map.addLayer(sevierCamp);
-    map.addLayer(sevierHHCamp);
-    map.addLayer(sevierPicnic);
-    map.addLayer(sevierRangerStation);
-    map.addLayer(sevierRestrooms);
+    sevierLayerControl.addTo(map);
     map.addLayer(sevierTrails);
-    map.addLayer(sevierWCamp);
 });
 
 $(".btn-swain").on("click", function(){
     removeLayers();
-    map.addLayer(swainCamp);
-    map.addLayer(swainHHCamp);
-    map.addLayer(swainPicnic);
-    map.addLayer(swainRangerStation);
-    map.addLayer(swainRestrooms);
+    swainLayerControl.addTo(map);
     map.addLayer(swainTrails);
-    map.addLayer(swainWCamp);
 });
 
 $(".btn-reset").on("click", function(){
     removeLayers();
+    initialLayerControl.addTo(map);
     map.addLayer(trails);
 });
 

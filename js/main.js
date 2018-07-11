@@ -854,8 +854,8 @@ var swainWCamp = L.geoJson(null,{
         });
     },
     onEachFeature: function (feature, layer){
-        var popupText = "Location Name: " +feature.properties.label +
-        "<br>On Trail: " +feature.properties.trail +
+        var popupText = "<p>Location Name:</p>" + feature.properties.label +
+        "<br><p>On Trail:</p>" +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
         "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
@@ -874,8 +874,8 @@ sql.execute(swainWCampQuery, null, {format: "geojson"}).done(function(data){
 
 //Create a highlight for the trails
 var highlightLine = {
-    weight: 5,
-    color: "#3B555C",
+    weight: 3,
+    color: "yellow",
     fillOpacity: 0.6
 }
 
@@ -913,7 +913,7 @@ var trails = L.geoJson(null, {
     }
 }).addTo(map);
 //Create the SQL query
-var trailQuery = "SELECT * FROM grsm_trails";
+var trailQuery = "SELECT * FROM grsm_merged_trails";
 //Get username in order to execute the query
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(trailQuery, null, {format: "geojson"}).done(function(data){

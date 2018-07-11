@@ -144,6 +144,17 @@ h1, h3{
 #form{
     z-index: 2;
 }
+.custom-popup .leaflet-popup-content-wrapper{
+    background:#666600;
+    color:#fff;
+    font-size:14px;
+    font-family: 'Amiko';
+    border-radius: 6px;
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+    color:rgba(255,255,255,0.1);
+}
+
 
 @media screen and (max-width: 768px) and (orientation: portrait){
     #wrapper{
@@ -161,13 +172,10 @@ h1, h3{
         overflow: auto;
     }
     .button{
-        padding-left: 50px;
-    }
-    .btn-swain{
-        margin-left: 70px;
+        padding-left: 120px;
     }
     .edit_button{
-        padding-left: 85px;
+        padding-left: 180px;
     }
     #logo{
         display: none;

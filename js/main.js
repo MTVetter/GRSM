@@ -1448,8 +1448,8 @@ map.on("draw:created", function(e){
 //Create a jQuery UI dialog box
 var dialog = $("#form").dialog({
     autoOpen: false,
-    height: 300,
-    width: 300,
+    height: 350,
+    width: 250,
     modal: true,
     position:{
         my: "center center",

@@ -1114,8 +1114,37 @@ sql.execute(wCampQuery, null, {format: "geojson"}).done(function(data){
     wCamp.addData(data);
 });
 
+//Icon to represent the reported problem
+var problemIcon = L.icon({
+    iconUrl: "img/problem.png",
+    iconSize: [30,30]
+});
+
+//Create the features that the users will enter
+var collectedPoints = L.geoJson(null,{
+    pointToLayer: function(feature, latlng){
+        return L.marker(latlng, {
+            icon: problemIcon
+        });
+    },
+    onEachFeature: function (feature, layer){
+        var popupText = "Location Name: " +feature.properties.location +
+        "<br>Description of Problem: " +feature.properties.description +
+        "<br>Date of Problem: " +feature.properties.created_at; 
+        layer.bindPopup(popupText);
+    }
+});
+//Create the SQL query
+var sqlQuery = "SELECT * FROM grsm_collected_data";
+//Get username in order to execute the query
+var sql = new cartodb.SQL({user: 'brbadger'});
+sql.execute(sqlQuery, null, {format: "geojson"}).done(function(data){
+    collectedPoints.addData(data);
+});
+
 //Create a baseLayers group
 var baseLayers = {
+    "Weather": weather,
     "Trails": trails,
     "Restrooms": restrooms,
     "Ranger Stations": rangerStation,
@@ -1123,9 +1152,10 @@ var baseLayers = {
     "Horse and Hiker Campsites": hhCamp,
     "Hiker Only Campsite": camp,
     "Water-access Only Campsite": wCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 var blountLayers = {
+    "Weather": weather,
     "Trails": blountTrails,
     "Restrooms": blountRestrooms,
     "Ranger Stations": blountRangerStation,
@@ -1133,9 +1163,10 @@ var blountLayers = {
     "Horse and Hiker Campsites": blountHHCamp,
     "Hiker Only Campsite": blountCamp,
     "Water-access Only Campsite": blountWCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 var cockeLayers = {
+    "Weather": weather,
     "Trails": cockeTrails,
     "Restrooms": cockeRestrooms,
     "Ranger Stations": cockeRangerStation,
@@ -1143,9 +1174,10 @@ var cockeLayers = {
     "Horse and Hiker Campsites": cockeHHCamp,
     "Hiker Only Campsite": cockeCamp,
     "Water-access Only Campsite": cockeWCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 var haywoodLayers = {
+    "Weather": weather,
     "Trails": haywoodTrails,
     "Restrooms": haywoodRestrooms,
     "Ranger Stations": haywoodRangerStation,
@@ -1153,9 +1185,10 @@ var haywoodLayers = {
     "Horse and Hiker Campsites": haywoodHHCamp,
     "Hiker Only Campsite": haywoodCamp,
     "Water-access Only Campsite": haywoodWCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 var sevierLayers = {
+    "Weather": weather,
     "Trails": sevierTrails,
     "Restrooms": sevierRestrooms,
     "Ranger Stations": sevierRangerStation,
@@ -1163,9 +1196,10 @@ var sevierLayers = {
     "Horse and Hiker Campsites": sevierHHCamp,
     "Hiker Only Campsite": sevierCamp,
     "Water-access Only Campsite": sevierWCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 var swainLayers = {
+    "Weather": weather,
     "Trails": swainTrails,
     "Restrooms": swainRestrooms,
     "Ranger Stations": swainRangerStation,
@@ -1173,7 +1207,7 @@ var swainLayers = {
     "Horse and Hiker Campsites": swainHHCamp,
     "Hiker Only Campsite": swainCamp,
     "Water-access Only Campsite": swainWCamp,
-    "Weather": weather
+    "Problem Areas": collectedPoints
 };
 //Add the base maps to the map so the user can decide
 var initialLayerControl = L.control.layers(null, baseLayers).addTo(map);
@@ -1298,7 +1332,6 @@ function removeLayers(){
 
 $(".btn-blount").on("click", function(){
     removeLayers();
-    // initialLayerControl.remove(map);
     blountLayerControl.addTo(map);
     map.addLayer(blountTrails);
 });
@@ -1336,33 +1369,37 @@ $(".btn-reset").on("click", function(){
 
 //Create a function that will refresh the entered data before putting it on the map
 function refresh(){
-    //Icon to represent the reported problem
-    var problemIcon = L.icon({
-        iconUrl: "img/problem.png",
-        iconSize: [30,30]
-    });
+    // //Icon to represent the reported problem
+    // var problemIcon = L.icon({
+    //     iconUrl: "img/problem.png",
+    //     iconSize: [30,30]
+    // });
 
-    //Create the features that the users will enter
-    var collectedPoints = L.geoJson(null,{
-        pointToLayer: function(feature, latlng){
-            return L.marker(latlng, {
-                icon: problemIcon
-            });
-        },
-        onEachFeature: function (feature, layer){
-            var popupText = "Location Name: " +feature.properties.location +
-            "<br>Description of Problem: " +feature.properties.description +
-            "<br>Entered By: " +feature.properties.name; 
-            layer.bindPopup(popupText);
-        }
-    }).addTo(map);
-    //Create the SQL query
-    var sqlQuery = "SELECT * FROM grsm_collected_data";
-    //Get username in order to execute the query
-    var sql = new cartodb.SQL({user: 'brbadger'});
-    sql.execute(sqlQuery, null, {format: "geojson"}).done(function(data){
-        collectedPoints.addData(data);
-    });
+    // //Create the features that the users will enter
+    // var collectedPoints = L.geoJson(null,{
+    //     pointToLayer: function(feature, latlng){
+    //         return L.marker(latlng, {
+    //             icon: problemIcon
+    //         });
+    //     },
+    //     onEachFeature: function (feature, layer){
+    //         var popupText = "Location Name: " +feature.properties.location +
+    //         "<br>Description of Problem: " +feature.properties.description +
+    //         "<br>Date of Problem: " +feature.properties.created_at; 
+    //         layer.bindPopup(popupText);
+    //     }
+    // }).addTo(map);
+    // //Create the SQL query
+    // var sqlQuery = "SELECT * FROM grsm_collected_data";
+    // //Get username in order to execute the query
+    // var sql = new cartodb.SQL({user: 'brbadger'});
+    // sql.execute(sqlQuery, null, {format: "geojson"}).done(function(data){
+    //     collectedPoints.addData(data);
+    // });
+    if (map.hasLayer(collectedPoints)){
+        map.removeLayer(collectedPoints);
+    };
+    map.addLayer(collectedPoints);
 };
 
 //Create the Draw control for the draw tools and toolbox
@@ -1442,11 +1479,12 @@ function setData(){
     var enteredUsername = username.value;
     var enteredDescription = description.value;
     var enteredLocation = loc.value;
+    var enteredDate = date.value;
     console.log(enteredLocation);
     drawItems.eachLayer(function (layer){
-        var postSQL = "INSERT INTO grsm_collected_data (the_geom, location, description, latitude, longitude, name) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
+        var postSQL = "INSERT INTO grsm_collected_data (the_geom, location, description, latitude, longitude, created_at, name) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
         var a = layer.getLatLng();
-        var postSQL2 = '{"type":"Point", "coordinates":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredLocation + "','" + enteredDescription +"','"+a.lat+"','"+a.lng+"','"+enteredUsername+"')";
+        var postSQL2 = '{"type":"Point", "coordinates":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredLocation + "','" + enteredDescription +"','"+a.lat+"','"+a.lng+"','"+enteredDate+"','"+enteredUsername+"')";
         console.log(postSQL2);
         var pURL = postSQL + postSQL2;
         $.post("https://brbadger.carto.com/api/v2/sql?q=" + pURL + "&api_key=33f541577cddb55c4781b1ed07bd4c9a4a36ed4c")

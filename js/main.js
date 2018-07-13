@@ -1,7 +1,7 @@
 /* Main JavaScript sheet for Great Smokey Mountains by Michael Vetter*/
 
 //Set up the initial location of the map
-var initialLocation = [35.606144, -83.590687];
+var initialLocation = [35.606144, -83.519687];
 
 //Set up the initial zoom of the map
 var initialZoom = 10;
@@ -24,6 +24,14 @@ var weather = L.esri.dynamicMapLayer({
     url: 'https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/radar_base_reflectivity/MapServer',
     opacity: 0.7
   }).addTo(map);
+
+//Create cluster groups
+var cluster = L.markerClusterGroup();
+var blountCluster = L.markerClusterGroup();
+var cockeCluster = L.markerClusterGroup();
+var haywoodCluster = L.markerClusterGroup();
+var sevierCluster = L.markerClusterGroup();
+var swainCluster = L.markerClusterGroup();
 
 //Create the features for Blount County
 //Add trails
@@ -90,6 +98,7 @@ var blountRestroomQuery = "SELECT * FROM grsm_restrooms WHERE county = 'Blount'"
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(blountRestroomQuery, null, {format: "geojson"}).done(function(data){
     blountRestrooms.addData(data);
+    blountCluster.addLayer(blountRestrooms);
 });
 
 //Add the park ranger locations
@@ -257,6 +266,7 @@ var cockeRestroomQuery = "SELECT * FROM grsm_restrooms WHERE county = 'Cocke'";
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(cockeRestroomQuery, null, {format: "geojson"}).done(function(data){
     cockeRestrooms.addData(data);
+    cockeCluster.addLayer(cockeRestrooms);
 });
 
 //Add the park ranger locations
@@ -428,6 +438,7 @@ var haywoodRestroomQuery = "SELECT * FROM grsm_restrooms WHERE county = 'Haywood
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(haywoodRestroomQuery, null, {format: "geojson"}).done(function(data){
     haywoodRestrooms.addData(data);
+    haywoodCluster.addLayer(haywoodRestrooms);
 });
 
 //Add Ranger Stations
@@ -598,6 +609,7 @@ var sevierRestroomQuery = "SELECT * FROM grsm_restrooms WHERE county = 'Sevier'"
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(sevierRestroomQuery, null, {format: "geojson"}).done(function(data){
     sevierRestrooms.addData(data);
+    sevierCluster.addLayer(sevierRestrooms);
 });
 
 //Add Ranger Stations
@@ -768,6 +780,7 @@ var swainRestroomQuery = "SELECT * FROM grsm_restrooms WHERE county = 'Swain'";
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(swainRestroomQuery, null, {format: "geojson"}).done(function(data){
     swainRestrooms.addData(data);
+    swainCluster.addLayer(swainRestrooms);
 });
 
 //Add Ranger Stations
@@ -960,7 +973,11 @@ var restroomQuery = "SELECT * FROM grsm_restrooms";
 var sql = new cartodb.SQL({user: 'brbadger'});
 sql.execute(restroomQuery, null, {format: "geojson"}).done(function(data){
     restrooms.addData(data);
+    cluster.addLayer(restrooms);
 });
+
+
+// map.addLayer(cluster);
 
 //Park Rangers icon
 var rangerIcon = L.icon({
@@ -1146,7 +1163,7 @@ sql.execute(sqlQuery, null, {format: "geojson"}).done(function(data){
 var baseLayers = {
     "Weather": weather,
     "Trails": trails,
-    "Restrooms": restrooms,
+    "Restrooms": cluster,
     "Ranger Stations": rangerStation,
     "Picnic Areas": picnic,
     "Horse and Hiker Campsites": hhCamp,
@@ -1157,7 +1174,7 @@ var baseLayers = {
 var blountLayers = {
     "Weather": weather,
     "Trails": blountTrails,
-    "Restrooms": blountRestrooms,
+    "Restrooms": blountCluster,
     "Ranger Stations": blountRangerStation,
     "Picnic Areas": blountPicnic,
     "Horse and Hiker Campsites": blountHHCamp,
@@ -1168,7 +1185,7 @@ var blountLayers = {
 var cockeLayers = {
     "Weather": weather,
     "Trails": cockeTrails,
-    "Restrooms": cockeRestrooms,
+    "Restrooms": cockeCluster,
     "Ranger Stations": cockeRangerStation,
     "Picnic Areas": cockePicnic,
     "Horse and Hiker Campsites": cockeHHCamp,
@@ -1179,7 +1196,7 @@ var cockeLayers = {
 var haywoodLayers = {
     "Weather": weather,
     "Trails": haywoodTrails,
-    "Restrooms": haywoodRestrooms,
+    "Restrooms": haywoodCluster,
     "Ranger Stations": haywoodRangerStation,
     "Picnic Areas": haywoodPicnic,
     "Horse and Hiker Campsites": haywoodHHCamp,
@@ -1190,7 +1207,7 @@ var haywoodLayers = {
 var sevierLayers = {
     "Weather": weather,
     "Trails": sevierTrails,
-    "Restrooms": sevierRestrooms,
+    "Restrooms": sevierCluster,
     "Ranger Stations": sevierRangerStation,
     "Picnic Areas": sevierPicnic,
     "Horse and Hiker Campsites": sevierHHCamp,
@@ -1201,7 +1218,7 @@ var sevierLayers = {
 var swainLayers = {
     "Weather": weather,
     "Trails": swainTrails,
-    "Restrooms": swainRestrooms,
+    "Restrooms": swainCluster,
     "Ranger Stations": swainRangerStation,
     "Picnic Areas": swainPicnic,
     "Horse and Hiker Campsites": swainHHCamp,
@@ -1247,14 +1264,14 @@ function removeLayers(){
         map.removeLayer(blountHHCamp);
         map.removeLayer(blountPicnic);
         map.removeLayer(blountRangerStation);
-        map.removeLayer(blountRestrooms);
+        map.removeLayer(blountCluster);
         map.removeLayer(blountTrails);
         map.removeLayer(blountWCamp);
         map.removeLayer(camp);
         map.removeLayer(hhCamp);
         map.removeLayer(picnic);
         map.removeLayer(rangerStation);
-        map.removeLayer(restrooms);
+        map.removeLayer(cluster);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
         blountLayerControl.remove(map);

@@ -26,7 +26,9 @@ var weather = L.esri.dynamicMapLayer({
   }).addTo(map);
 
 //Create cluster groups
-var cluster = L.markerClusterGroup();
+var cluster = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false
+});
 var blountCluster = L.markerClusterGroup();
 var cockeCluster = L.markerClusterGroup();
 var haywoodCluster = L.markerClusterGroup();
@@ -1281,14 +1283,14 @@ function removeLayers(){
         map.removeLayer(cockeHHCamp);
         map.removeLayer(cockePicnic);
         map.removeLayer(cockeRangerStation);
-        map.removeLayer(cockeRestrooms);
+        map.removeLayer(cockeCluster);
         map.removeLayer(cockeTrails);
         map.removeLayer(cockeWCamp);
         map.removeLayer(camp);
         map.removeLayer(hhCamp);
         map.removeLayer(picnic);
         map.removeLayer(rangerStation);
-        map.removeLayer(restrooms);
+        map.removeLayer(cluster);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
         cockeLayerControl.remove(map);
@@ -1298,14 +1300,14 @@ function removeLayers(){
         map.removeLayer(haywoodHHCamp);
         map.removeLayer(haywoodPicnic);
         map.removeLayer(haywoodRangerStation);
-        map.removeLayer(haywoodRestrooms);
+        map.removeLayer(haywoodCluster);
         map.removeLayer(haywoodTrails);
         map.removeLayer(haywoodWCamp);
         map.removeLayer(camp);
         map.removeLayer(hhCamp);
         map.removeLayer(picnic);
         map.removeLayer(rangerStation);
-        map.removeLayer(restrooms);
+        map.removeLayer(cluster);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
         haywoodLayerControl.remove(map);
@@ -1315,14 +1317,14 @@ function removeLayers(){
         map.removeLayer(sevierHHCamp);
         map.removeLayer(sevierPicnic);
         map.removeLayer(sevierRangerStation);
-        map.removeLayer(sevierRestrooms);
+        map.removeLayer(sevierCluster);
         map.removeLayer(sevierTrails);
         map.removeLayer(sevierWCamp);
         map.removeLayer(camp);
         map.removeLayer(hhCamp);
         map.removeLayer(picnic);
         map.removeLayer(rangerStation);
-        map.removeLayer(restrooms);
+        map.removeLayer(cluster);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
         sevierLayerControl.remove(map);
@@ -1332,14 +1334,14 @@ function removeLayers(){
         map.removeLayer(swainHHCamp);
         map.removeLayer(swainPicnic);
         map.removeLayer(swainRangerStation);
-        map.removeLayer(swainRestrooms);
+        map.removeLayer(swainCluster);
         map.removeLayer(swainTrails);
         map.removeLayer(swainWCamp);
         map.removeLayer(camp);
         map.removeLayer(hhCamp);
         map.removeLayer(picnic);
         map.removeLayer(rangerStation);
-        map.removeLayer(restrooms);
+        map.removeLayer(cluster);
         map.removeLayer(trails);
         map.removeLayer(wCamp);
         swainLayerControl.remove(map);

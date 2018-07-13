@@ -136,7 +136,6 @@ var blountHHCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -162,7 +161,6 @@ var blountCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -188,7 +186,6 @@ var blountWCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -305,7 +302,6 @@ var cockeHHCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -332,7 +328,6 @@ var cockeCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -359,7 +354,6 @@ var cockeWCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -478,7 +472,6 @@ var haywoodHHCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -504,7 +497,6 @@ var haywoodCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -530,7 +522,6 @@ var haywoodWCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -649,7 +640,6 @@ var sevierHHCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -675,7 +665,6 @@ var sevierCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -701,7 +690,6 @@ var sevierWCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -820,7 +808,6 @@ var swainHHCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -846,7 +833,6 @@ var swainCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -872,7 +858,6 @@ var swainWCamp = L.geoJson(null,{
         var popupText = "<p>Location Name:</p>" + feature.properties.label +
         "<br><p>On Trail:</p>" +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -1054,7 +1039,6 @@ var hhCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -1086,7 +1070,6 @@ var camp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 
@@ -1118,7 +1101,6 @@ var wCamp = L.geoJson(null,{
         var popupText = "Location Name: " +feature.properties.label +
         "<br>On Trail: " +feature.properties.trail +
         "<br>Capacity: " +feature.properties.capacity +
-        "<br>Campsite Access Restriction: " +feature.properties.camp_restr +
         "<br>Bear Cables: " +feature.properties.bearcables +
         "<br>Elevation (feet): " +feature.properties.elev_ft +
         "<br>Elevation (meters): " +feature.properties.elev_m; 

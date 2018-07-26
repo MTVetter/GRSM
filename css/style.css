@@ -145,8 +145,8 @@ h1, h3{
     z-index: 2;
 }
 .custom-popup .leaflet-popup-content-wrapper{
-    background:#666600;
-    color:#fff;
+    background:white;
+    color:black;
     font-size:14px;
     font-family: 'Amiko';
     border-radius: 6px;
